@@ -29,11 +29,15 @@ class MainWindow(QMainWindow):
     
     def compareLdaps(self):
         compareWindow = CompareWindow(self.context)
-        cfg = [f for f in os.listdir(os.path.join(appdataPath,'Connections')) if os.path.isfile(os.path.join(appdataPath,'Connections',f))]
         compareWindow.setModal(True)
         compareWindow.show()
         if compareWindow.exec_() == QDialog.Accepted:
-            print("Accept")
+            sourceCfg = compareWindow.comboBox_source.currentText()
+            targetCfg = compareWindow.comboBox_target.currentText()
+            basedn = compareWindow.lineEdit_basedn.text()
+            filter = compareWindow.lineEdit_filter.text()
+            attributes = compareWindow.lineEdit_attributes.text()
+            scope = compareWindow.comboBox_scope.currentText()
             return
         print("Cancel")
 
